@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState, type ChangeEvent } from 'react'
+import { Analytics } from '@vercel/analytics/react'
 import { exportDocx, exportPdf, exportText, NO_ACTIONS, sections, type Result } from './export.ts'
 import {
   decodeText,
@@ -322,6 +323,7 @@ export default function App() {
       <footer className="bar footer">
         <p className="wrap">Minutely · Free to use · Your notes never leave your computer.</p>
       </footer>
+      <Analytics />
     </>
   )
 }
