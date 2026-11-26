@@ -74,6 +74,8 @@ vercel.json          Security headers (CSP)
 
 ## Limitations
 
-- distilbart was trained on news articles, so it writes extractive-leaning summaries and favors the beginning of each chunk.
+- distilbart was trained on news articles and sometimes invents details. Minutely checks every summary sentence against your notes. It drops any sentence with a word or number that isn't in the notes, or with long stretches of new phrasing. If nothing from part of the notes survives, it uses that part's two most representative sentences, quoted word for word. This catches invented facts, but a short sentence that recombines real phrases into a wrong claim can still slip through.
+- Notes under 40 words aren't summarized, and notes over 10,000 words have to be split into parts.
 - Chunking is based on word count (about 550 words per chunk), not exact token count.
-- Action-item detection uses keyword rules. "by" in particular can catch the odd non-action sentence.
+- Action items are found by rules. "will" and "should" only count when a person, pronoun or team comes before them, and "by" only counts before a date. Lowercase names ("sam will…") and passive phrasing ("the room needs booking") are missed.
+- In the PDF, lines with characters outside Western European fonts (for example Vietnamese, Bengali, Chinese or emoji) are embedded as sharp images. They display and print correctly but can't be selected or searched. The .docx and .txt exports keep them as real text.
