@@ -82,8 +82,7 @@ ul {
   padding: 0 var(--s4);
 }
 
-.grid,
-.privacy-cols {
+.grid {
   display: grid;
   grid-template-columns: repeat(12, minmax(0, 1fr));
   column-gap: var(--s3);
@@ -408,23 +407,38 @@ html {
   letter-spacing: -0.03em;
 }
 
+/* Four equal-height cards: 4 columns on desktop, 2 on tablets, 1 on phones. */
 .privacy-cols {
-  row-gap: var(--s4);
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: var(--s2);
 }
 
-.privacy-cols > div {
-  grid-column: span 3;
+.card {
+  padding: var(--s3);
+  background: #ffffff;
+  border: 1px solid var(--line);
+  border-radius: 12px;
 }
 
-.privacy h3 {
+.card-icon {
+  display: block;
+  width: 20px;
+  height: 20px;
+  margin-bottom: var(--s2);
+  color: var(--signal);
+}
+
+.card h3 {
   margin-bottom: var(--s1);
   font-size: 16px;
   font-weight: 600;
 }
 
-.privacy p {
+.card p {
   color: var(--muted);
-  font-size: 16px;
+  font-size: 15px;
+  line-height: 1.55;
 }
 
 .footer {
@@ -439,8 +453,8 @@ html {
   .result {
     grid-column: 1 / -1;
   }
-  .privacy-cols > div {
-    grid-column: span 6;
+  .privacy-cols {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
   .grid {
     padding-block: var(--s8);
@@ -457,8 +471,8 @@ html {
   .band {
     padding: var(--s8) 0;
   }
-  .privacy-cols > div {
-    grid-column: 1 / -1;
+  .privacy-cols {
+    grid-template-columns: 1fr;
   }
   .result {
     min-height: 0;

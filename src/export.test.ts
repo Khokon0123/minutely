@@ -57,4 +57,9 @@ assert.ok(shown.includes('(v2.0) & pricing.') && shown.includes('<timing>'))
 assert.ok(pdfCanDraw('José, Zoë, Søren, “quotes” — 5 € • …'))
 for (const t of ['Nguyễn', 'রহিম', '王伟', '🎉']) assert.equal(pdfCanDraw(t), false, t)
 
+// Analytics: only page views, with the URL stripped to origin + path.
+const { pageViewOnly } = await import('./analytics.ts')
+assert.deepEqual(pageViewOnly({ type: 'pageview', url: 'https://minutely.app/?q=secret#privacy' }), { type: 'pageview', url: 'https://minutely.app/' })
+assert.equal(pageViewOnly({ type: 'event', url: 'https://minutely.app/' }), null)
+
 console.log('export: all checks passed')

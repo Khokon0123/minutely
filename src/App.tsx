@@ -296,19 +296,26 @@ export default function App() {
         <div className="wrap privacy">
           <h2 id="privacy-title">How your privacy is protected</h2>
           <div className="privacy-cols">
-            <div>
+            <div className="card">
+              <svg className="card-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="12" rx="2" /><path d="M2 20h20" /></svg>
               <h3>Your notes stay on your computer</h3>
               <p>Your notes are processed right here in your browser. They are never sent anywhere.</p>
             </div>
-            <div>
+            <div className="card">
+              <svg className="card-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M3 6h18" /><path d="M8 6V4h8v2" /><path d="M6 6l1 14h10l1-14" /><path d="M10 11v5M14 11v5" /></svg>
               <h3>Nothing is saved</h3>
-              <p>There are no accounts, cookies or tracking. Closing the page clears everything.</p>
+              <p>
+                Nothing you type is saved, and closing the page clears everything. We count page visits anonymously, without cookies. Your notes
+                are never included.
+              </p>
             </div>
-            <div>
+            <div className="card">
+              <svg className="card-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M2 2l20 20" /><path d="M8.5 16.5a5 5 0 0 1 7 0" /><path d="M5 12.9a10 10 0 0 1 5.2-2.7" /><path d="M19 12.9a10 10 0 0 0-2-1.5" /><path d="M2 8.8a15 15 0 0 1 4.2-2.7" /><path d="M10.7 5c4-.4 8.1.9 11.3 3.8" /><path d="M12 20h.01" /></svg>
               <h3>Works without internet</h3>
               <p>Once the page is ready, it keeps working even if you turn off Wi-Fi. Just keep the page open.</p>
             </div>
-            <div>
+            <div className="card">
+              <svg className="card-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M19.44 7.85c-.05.32.06.65.29.88l1.57 1.57c.47.47.7 1.09.7 1.7s-.23 1.23-.7 1.7l-1.61 1.62a.98.98 0 0 1-.84.27c-.47-.07-.8-.48-.97-.92a2.5 2.5 0 1 0-3.21 3.21c.44.17.85.5.92.97a.98.98 0 0 1-.27.84l-1.62 1.61c-.47.47-1.09.7-1.7.7s-1.23-.23-1.7-.7l-1.57-1.57a1.03 1.03 0 0 0-.88-.29c-.49.07-.84.5-1.02.97a2.5 2.5 0 1 1-3.24-3.24c.47-.18.9-.53.97-1.02a1.03 1.03 0 0 0-.29-.88l-1.57-1.57A2.4 2.4 0 0 1 2 12c0-.62.24-1.23.7-1.7l1.53-1.53c.24-.24.58-.35.92-.3.51.08.88.53 1.07 1.01a2.5 2.5 0 1 0 3.26-3.26c-.48-.2-.93-.56-1.01-1.07-.05-.34.06-.68.3-.92L10.3 2.7A2.4 2.4 0 0 1 12 2c.62 0 1.23.24 1.7.7l1.57 1.57c.23.23.56.34.88.29.49-.07.84-.5 1.02-.97a2.5 2.5 0 1 1 3.24 3.24c-.47.18-.9.53-.97 1.02Z" /></svg>
               <h3>Watch your browser extensions</h3>
               <p>
                 Browser extensions can read what you type. Grammarly and similar tools may send text to their own servers, so turn them off for this page

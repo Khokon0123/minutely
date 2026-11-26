@@ -18,8 +18,9 @@ Minutely turns raw meeting notes into a short summary, a list of action items, a
 | Guarantee | How it's enforced |
 | --- | --- |
 | Your text never leaves the device | The app is static files only. The model runs in a Web Worker via WebAssembly. No code path sends your notes anywhere. |
-| Nothing is stored | No cookies, no `localStorage`/`sessionStorage`/IndexedDB for user text, no analytics, no tracking scripts. Notes live in React state and disappear on **Clear** or when the tab closes. Nothing logs user content to the console. |
-| Only two kinds of network traffic | The app's own static files, plus the model weights from Hugging Face. Fonts and the ONNX Runtime `.wasm` files are self-hosted, with no Google Fonts and no CDN. |
+| Nothing is stored | No cookies and no `localStorage`/`sessionStorage`/IndexedDB for user text. Notes live in React state and disappear on **Clear** or when the tab closes. Nothing logs user content to the console. |
+| Anonymous visit counts only | We count page visits anonymously, without cookies. Your notes are never included. Counting uses [Vercel Web Analytics](https://vercel.com/docs/analytics), served from this site's own domain (`/_vercel/insights/…`) and loaded only in production builds. Its `beforeSend` filter (`src/analytics.ts`) only lets page views through, and strips the URL down to the page address with no query string or hash. Your notes never appear in the URL, and no custom events are sent. |
+| Limited network traffic | The app's own static files, the model weights from Hugging Face, and the anonymous page-view count sent to this site's own `/_vercel/insights` endpoint. Fonts and the ONNX Runtime `.wasm` files are self-hosted, with no Google Fonts and no CDN. |
 | The browser enforces it | `vercel.json` sets a strict Content-Security-Policy: `connect-src` allows only `'self'`, `huggingface.co`, and its file hosts (`*.huggingface.co`, `*.hf.co`). Scripts, fonts, and styles must come from our own origin. Even a bug or a compromised dependency can't send your notes to some other server. |
 | Keeps working offline while open | Once the model has loaded, everything it needs is in the open tab. Turn off Wi-Fi and keep summarizing without closing or refreshing the page. A refresh needs a connection to load the page itself (there is no service worker), though the model comes back from Cache Storage (`transformers-cache`) instead of being downloaded again. |
 
@@ -27,7 +28,7 @@ The only thing ever cached is the public model itself, never your notes.
 
 ### Verify it yourself
 
-1. Open DevTools → **Network**, load the page, summarize something. You'll see only same-origin requests and (on first visit) model files from Hugging Face.
+1. Open DevTools → **Network**, load the page, summarize something. You'll see only same-origin requests (including one page-view request to `/_vercel/insights/view` on the live site) and, on first visit, model files from Hugging Face. Summarizing sends nothing.
 2. Once the model is ready, turn off Wi-Fi and summarize again without refreshing the page.
 3. DevTools → **Application**: no cookies, empty Local/Session Storage. The only Cache Storage entry is `transformers-cache`, which holds the model.
 
@@ -59,7 +60,7 @@ npm i -g vercel
 vercel            # framework: Vite, build: npm run build, output: dist
 ```
 
-Or import the repository in the Vercel dashboard. It detects Vite automatically. `vercel.json` applies the Content-Security-Policy and other security headers to every route.
+Or import the repository in the Vercel dashboard. It detects Vite automatically. To see visit counts, turn on **Analytics** in the project's dashboard; until then the script isn't served and nothing is counted. `vercel.json` applies the Content-Security-Policy and other security headers to every route.
 
 ## Project layout
 
